@@ -1,0 +1,51 @@
+{# https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp #}
+<div class="topnav" id="myTopnav">
+    
+    <div class="leftNav">
+        <a href="#">ACCUEIL</a>
+        <div class="dropdown">
+            <button class="dropbtn">SESSIONS
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Liste</a>
+                <a href="#">Nouvelle Session</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">MODULES
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Liste</a>
+                <a href="#">Nouveau module</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">CATEGORIES
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Liste</a>
+                <a href="#">Nouvelle catégorie</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">STAGIAIRES
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Liste</a>
+                <a href="#">Nouveau stagiaire</a>
+            </div>
+        </div>
+    </div>
+    <div class="rightNav">
+        <a href="#"><i class="fa-solid fa-user"></i> MON PROFIL</a>
+        <a href="#">DECONNEXION</a>
+    </div>
+    <div class="rightNavButton">
+    {# Bouton à droite de la navBar lorsque la largeur de la page est inférieur à 600px #}
+    <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
+    </div> 
+</div>
