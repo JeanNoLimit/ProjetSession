@@ -5,3 +5,33 @@
   font-family: poppins;  
 }
 
+.container{
+    max-width: 90%;
+    margin: 60px auto;
+}
+
+
+/*************************************HomePage ***************************************/
+
+.homeTitle{
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.description{
+    margin: 40px auto;
+    text-align: center;
+
+}
+
+.description a{
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 600;
+    color: #1C7193;
+}
+
+.description a:hover{
+    color: #2bacdf;
+}
