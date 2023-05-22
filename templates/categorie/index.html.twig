@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+
+    <h1>Liste des catégories</h1>
+
+    <div class="container">
+
+        <table class="tList">
+            <thead>
+                <tr>
+                    <th>Session</th>
+                    <th>modification / Suppression</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categorie in categories %}
+                <tr>
+                    <td>{{categorie.nom}}</td>
+                    <td><i class="fa-regular fa-pen-to-square"></i> / <i class="fa-regular fa-trash-can"></i></td>
+                </tr>  
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+
+{% endblock %}
