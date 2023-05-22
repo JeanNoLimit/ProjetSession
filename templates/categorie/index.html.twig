@@ -19,7 +19,7 @@
                 {% for categorie in categories %}
                 <tr>
                     <td>{{categorie.nom}}</td>
-                    <td><i class="fa-regular fa-pen-to-square"></i> / <i class="fa-regular fa-trash-can"></i></td>
+                    <td><a href="{{path('edit_categorie', {'id' :categorie.id })}}"><i class="fa-regular fa-pen-to-square"></i></a> / <i class="fa-regular fa-trash-can"></i></td>
                 </tr>  
                 {% endfor %}
                 

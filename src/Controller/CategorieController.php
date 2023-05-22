@@ -35,10 +35,13 @@ class CategorieController extends AbstractController
      */
 
     #[Route('/categorie/add', name: 'add_categorie')]
-    public function add(EntityManagerInterface $entityManager, Request $request): Response
+    #[Route('/categorie/{id}/edit', name: "edit_categorie")]
+    public function add(EntityManagerInterface $entityManager,Categorie $categorie = null, Request $request): Response
     {
-
-        $categorie=new Categorie();
+        if(!$categorie) {
+             $categorie=new Categorie();
+        }
+       
         //Création du formulaire
         $form =$this->createForm(CategorieType::class, $categorie);
 
@@ -46,8 +49,8 @@ class CategorieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // $categorie= $form->getData();
+            //getData récupère les données de l'entreprise si elle existe. (vue edit)
+            $categorie= $form->getData();
             $entityManager->persist($categorie);
 
             $entityManager->flush();
@@ -58,14 +61,10 @@ class CategorieController extends AbstractController
 
         }
 
-
-
-
-
-
-
         return $this->render('categorie/add.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'edit' => $categorie->getId(),
+            'categorie' => $categorie
         ]);
     }
 }

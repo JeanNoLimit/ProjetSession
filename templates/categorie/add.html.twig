@@ -3,8 +3,12 @@
 {% block title %}Nouvelle catégorie{% endblock %}
 
 {% block body %}
+    {% if edit %}
+        <h1>Modifier {{categorie.nom}}</h1>
+    {% else %}
+        <h1>Formulaire nouvelle catégorie</h1>
+    {% endif %}
 
-<h1>Formulaire nouvelle catégorie</h1>
 
 <div class="formContainer">
 {{ form_start(form) }}
