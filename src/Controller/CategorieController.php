@@ -3,13 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Form\CategorieType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
 {
+
+    /**
+     * Recette fonction renvoie vers l'affichage de la liste des catégories.
+     * @var EntityManagerInterface
+     */
     #[Route('/categorie', name: 'liste_categorie')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -18,6 +25,47 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories
+        ]);
+    }
+
+    /**
+     * Formulaire d'ajout de catégorie
+     * @param CategorieType $categorie
+     * @return Response
+     */
+
+    #[Route('/categorie/add', name: 'add_categorie')]
+    public function add(EntityManagerInterface $entityManager, Request $request): Response
+    {
+
+        $categorie=new Categorie();
+        //Création du formulaire
+        $form =$this->createForm(CategorieType::class, $categorie);
+
+        //Analyse de la requête du formulaire 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // $categorie= $form->getData();
+            $entityManager->persist($categorie);
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Categorie a bien été ajouté.');
+
+            return $this->redirectToRoute('liste_categorie');
+
+        }
+
+
+
+
+
+
+
+        return $this->render('categorie/add.html.twig',[
+            'form' => $form->createView()
         ]);
     }
 }

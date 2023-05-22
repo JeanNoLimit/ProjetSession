@@ -1,9 +1,8 @@
 /*******************************Tableau des vues listes (sessions, stagiaires, modules, catégories)***************************************/
 
 .tList{
-    margin: auto;
+    margin: 40px auto;
     border-collapse: collapse;
-
     border-radius: 5px !important;
     overflow: hidden !important;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.25);

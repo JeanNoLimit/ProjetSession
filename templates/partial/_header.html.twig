@@ -2,7 +2,7 @@
 <div class="topnav" id="myTopnav">
     
     <div class="leftNav">
-        <a href="#">ACCUEIL</a>
+        <a href="{{path('home.index')}}">ACCUEIL</a>
         <div class="dropdown">
             <button class="dropbtn">SESSIONS
                 <i class="fa fa-caret-down"></i>
@@ -27,7 +27,7 @@
             </button>
             <div class="dropdown-content">
                 <a href="{{path('liste_categorie')}}">Liste</a>
-                <a href="#">Nouvelle catégorie</a>
+                <a href="{{path('add_categorie')}}">Nouvelle catégorie</a>
             </div>
         </div>
         <div class="dropdown">

@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Nouvelle catégorie{% endblock %}
+
+{% block body %}
+
+<h1>Formulaire nouvelle catégorie</h1>
+
+<div class="formContainer">
+{{ form_start(form) }}
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.nom) }}
+        </div> 
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{{ form_end(form) }}
+</div>
+{% endblock %}
