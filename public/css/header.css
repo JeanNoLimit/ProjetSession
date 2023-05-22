@@ -111,6 +111,9 @@
       display: block;
       text-align: left;
     }
+    .topnav{
+      display: block;
+    }
     .topnav.responsive .dropdown {float: none;}
     .topnav.responsive .dropdown-content {position: relative;}
     .topnav.responsive .dropdown .dropbtn {
