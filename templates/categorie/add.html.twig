@@ -13,14 +13,13 @@
 <div class="formContainer">
 {{ form_start(form) }}
 
-    <div class="row">
-        <div class="col">
+        <div class="row">
             {{ form_row(form.nom) }}
         </div> 
         <div class="my-custom-class-for-errors">
             {{ form_errors(form) }}
         </div>
-    </div>
+    
 {{ form_end(form) }}
 </div>
 {% endblock %}

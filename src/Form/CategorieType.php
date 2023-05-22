@@ -15,10 +15,11 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Intitulé de la catégorie'
+                'label' => 'Intitulé de la catégorie',
+                'attr' => ['class' => 'input']
             ])
             ->add('envoyer', SubmitType::class, [
-                'attr' => ['class' => 'btn']
+                'attr' => ['class' => 'btn btn-submit']
             ])
 
         ;
