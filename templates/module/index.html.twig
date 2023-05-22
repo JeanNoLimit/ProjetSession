@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+
+{% block title %}Liste des modules{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+            
+        <div class="flash-success">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+    <h1>Liste des catégories</h1>
+
+    <a href="#" class="btn">Nouveau module</a>
+
+    <table class="tList">
+        <thead>
+            <tr>
+                <th>Module</th>
+                <th>Catégorie</th>
+                <th>modifications</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for module in modules %} 
+           
+            <tr>
+                <td>{{module.nom}}</td>
+                <td>{{module.categorie.nom}}</td>
+                <td><i class="fa-regular fa-pen-to-square"></i> / <i class="fa-regular fa-trash-can"></i></td>
+            </tr> 
+            
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
