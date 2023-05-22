@@ -36,6 +36,15 @@ tbody tr:nth-child(odd) {
     background-color: #D9D9D9;
   }
   
-  tbody tr:nth-child(even) {
+tbody tr:nth-child(even) {
     background-color: #F6F6F6;
   }
+
+.fa-pen-to-square{
+    color: #F6AF47;
+}
+
+.fa-trash-can{
+    color: rgb(223, 29, 29);
+}
+
