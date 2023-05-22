@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
+
+
+
+
 {% block title %}Liste des catégories{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+            
+        <div class="flash-success">
+            {{ message }}
+        </div>
 
+    {% endfor %}
     <h1>Liste des catégories</h1>
 
     <a href="{{path('add_categorie')}}" class="btn">Nouvelle catégorie</a>
@@ -19,7 +29,7 @@
                 {% for categorie in categories %}
                 <tr>
                     <td>{{categorie.nom}}</td>
-                    <td><a href="{{path('edit_categorie', {'id' :categorie.id })}}"><i class="fa-regular fa-pen-to-square"></i></a> / <i class="fa-regular fa-trash-can"></i></td>
+                    <td><a href="{{path('edit_categorie', {'id' :categorie.id })}}"><i class="fa-regular fa-pen-to-square"></i></a> / <a href="{{path('delete_categorie', {'id': categorie.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
                 </tr>  
                 {% endfor %}
                 

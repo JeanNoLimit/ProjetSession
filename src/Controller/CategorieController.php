@@ -29,7 +29,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * Formulaire d'ajout de catégorie
+     * Formulaire d'ajout de catégorie et modification.
      * @param CategorieType $categorie
      * @return Response
      */
@@ -55,7 +55,7 @@ class CategorieController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Categorie a bien été ajouté.');
+            $this->addFlash('success', 'La catégorie a bien été ajoutée.');
 
             return $this->redirectToRoute('liste_categorie');
 
@@ -67,4 +67,18 @@ class CategorieController extends AbstractController
             'categorie' => $categorie
         ]);
     }
+
+
+    #[Route('/categorie/delete/{id}', name: "delete_categorie")]
+    public function delete(EntityManagerInterface $entityManager, Categorie $categorie): Response
+    {
+        $entityManager->remove($categorie);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'La catégorie a bien été supprimée.');
+
+        return $this->redirectToRoute('liste_categorie');
+    }
+
+
 }
