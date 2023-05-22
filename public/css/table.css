@@ -1,0 +1,42 @@
+/*******************************Tableau des vues listes (sessions, stagiaires, modules, catégories)***************************************/
+
+.tList{
+    margin: auto;
+    border-collapse: collapse;
+
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
+}
+
+.tList thead{
+    background-color: #9B9B9B;
+    color: #fff;
+    border-bottom: solid 1px black;
+    height: 50px;
+    
+    
+}
+
+.tList thead th{
+    
+    font-weight: 400;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.tList td{
+    padding: 0 10px;
+    height: 40px;
+    text-align: center;
+
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #D9D9D9;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #F6F6F6;
+  }
