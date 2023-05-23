@@ -20,7 +20,7 @@ class StagiaireController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
-        $stagiaires=$entityManager->getRepository(Stagiaire::class)->findby([], ['nom' => 'ASC']);
+        $stagiaires=$entityManager->getRepository(Stagiaire::class)->findby([], ['nom' => 'ASC', 'prenom' => 'ASC']);
 
         
         return $this->render('stagiaire/index.html.twig', [
@@ -44,27 +44,43 @@ class StagiaireController extends AbstractController
     /**
      * fonction affichage formulaire nouveau stagiaire et modification
      */
-    #[route('/stagiaire/add', name:'add_stagiaire')]
+    #[Route('/stagiaire/add', name:'add_stagiaire')]
+    #[Route('stagiaire/{id}/edit', name:'edit_stagiaire')]
     public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire = null, Request $request):Response
     {
-        $stagiaire=new Stagiaire();
+        if(!$stagiaire){
+            $stagiaire=new Stagiaire();
+        }
 
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $stagiaire= $form->getData();
             $entityManager->persist($stagiaire);
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le stagiaire a bien été ajoutée.');
+            $this->addFlash('success', 'formulaire enregistré');
 
             return $this->redirectToRoute('liste_stagiaire');
         }
         return $this->render('stagiaire/add.html.twig',[
-            'formStagiaire' => $form
+            'formStagiaire' => $form,
+            'edit'=> $stagiaire->getId(),
+            'stagiaire' => $stagiaire
         ]);
+    }
+    #[Route('/stagiaire/delete/{id}', name:'delete_stagiaire')]
+    public function delete(EntityManagerInterface $entityManager, Stagiaire $stagiaire): Response
+    {
+        $entityManager->remove($stagiaire);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Le stagiaire a bien été supprimé.');
+
+        return $this->redirectToRoute('liste_stagiaire');
     }
 }

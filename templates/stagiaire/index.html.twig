@@ -26,7 +26,7 @@
     
         <tr>
             <td><a href="{{path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
-            <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            <td><a href="{{path('edit_stagiaire', {'id': stagiaire.id})}}"><i class="fa-regular fa-pen-to-square"></i></a> / <a href="{{path('delete_stagiaire', {'id': stagiaire.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
         </tr> 
 
         {% endfor %}
