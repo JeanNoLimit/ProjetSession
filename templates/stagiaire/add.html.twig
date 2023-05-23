@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}formulaire nouveau stagiaire{% endblock %}
+
+{% block body %}
+
+<h1>Formulaire nouveau stagiaire</h1>
+
+
+<div class="formContainer">
+    {{ form_start(formStagiaire) }}
+
+    <div class="row">
+        {{ form_row(formStagiaire.nom) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.prenom) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.sexe) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.dateNaissance) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.ville) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.email) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formStagiaire.tel) }}
+    </div> 
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(formStagiaire) }}
+    </div>
+
+{{ form_end(formStagiaire) }}
+</div>
+
+
+{% endblock %}

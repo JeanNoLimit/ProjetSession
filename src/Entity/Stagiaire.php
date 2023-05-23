@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\StagiaireRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Assert\ExpressionSyntax;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StagiaireRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StagiaireRepository::class)]
 class Stagiaire
@@ -17,13 +18,22 @@ class Stagiaire
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 1)]
+    #[ExpressionSyntax]
     private ?string $sexe = null;
+
+    #[Assert\ExpressionSyntax(
+        allowedVariables: ['M', 'F'],
+    )]
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
