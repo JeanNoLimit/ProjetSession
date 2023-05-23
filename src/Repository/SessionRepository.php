@@ -39,6 +39,13 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * fonction qui permet de retourner les sessions à venir
+     */
+    public function showFuturSession(){
+        
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

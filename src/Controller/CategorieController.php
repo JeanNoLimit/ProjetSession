@@ -14,7 +14,7 @@ class CategorieController extends AbstractController
 {
 
     /**
-     * Recette fonction renvoie vers l'affichage de la liste des catégories.
+     * Fonction renvoie vers l'affichage de la liste des catégories.
      * @var EntityManagerInterface
      */
     #[Route('/categorie', name: 'liste_categorie')]
@@ -67,7 +67,9 @@ class CategorieController extends AbstractController
             'categorie' => $categorie
         ]);
     }
-
+    /**
+     * Fonction suppression d'une catégorie
+     */
 
     #[Route('/categorie/delete/{id}', name: "delete_categorie")]
     public function delete(EntityManagerInterface $entityManager, Categorie $categorie): Response

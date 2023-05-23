@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+                
+    <div class="flash-success">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+    <h1>Liste des sessions</h1>
+
+        <a href="" class="btn">Nouvelle session</a>
+
+
+    <h2>Sessions à venir</h2>
+
+        <table class="tList">
+        <thead>
+            <tr>
+                <th>session</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+                <th>inscrits</th>
+                <th>modifications</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        
+            <tr>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+
+
+        </tbody>
+        </table>
+    
+    <h2>Sessions en cours</h2>
+
+    <table class="tList">
+        <thead>
+            <tr>
+                <th>session</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+                <th>inscrits</th>
+                <th>modifications</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        
+            <tr>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+
+
+        </tbody>
+        </table>
+
+    <h2>Sessions terminées</h2>
+
+        <table class="tList">
+            <thead>
+                <tr>
+                    <th>session</th>
+                    <th>date de début</th>
+                    <th>date de fin</th>
+                    <th>inscrits</th>
+                    <th>modifications</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            
+                <tr>
+                    <td><a href=""></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+                </tr> 
+    
+    
+            </tbody>
+            </table>
+
+{% endblock %}
