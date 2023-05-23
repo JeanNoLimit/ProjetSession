@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des stagiaires{% endblock %}
+
+{% block body %}
+
+<h1>Fiche stagiaire</h1>
+
+<a href="" class="btn">Modifier stagiaire</a>
+
+<div class="infoProfil">
+    
+    <h3>{{stagiaire.prenom}} {{stagiaire.nom}}</h3>
+
+    <p>sexe : {{stagiaire.sexe}}</p>
+    <p>Date de naissance : le {{stagiaire.dateNaissance|date('d/m/Y')}}</p>
+    <p>ville : {{stagiaire.ville}}</p>
+    <p>email : {{stagiaire.email}}</p>
+    <p>tél : {{stagiaire.tel}}</p>
+
+</div>
+
+    <h2>Sessions en cours ou à venir</h2>
+
+    <table class="tList">
+        <thead>
+            <tr>
+                <th>Session</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# {% for stagiaire in stagiaires %} 
+        
+            <tr>
+                <td><a href="{{path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+    
+            {% endfor %} #}
+        </tbody>
+        </table>
+
+
+
+{% endblock %}
