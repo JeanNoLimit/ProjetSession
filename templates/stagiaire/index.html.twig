@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StagiaireController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+                
+    <div class="flash-success">
+        {{ message }}
+    </div>
+
+    {% endfor %}
+    <h1>Liste des stagiaires</h1>
+
+    <a href="" class="btn">Nouveau Stagiaire</a>
+
+    <table class="tList">
+    <thead>
+        <tr>
+            <th>Prénom Nom</th>
+            <th>modifications</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stagiaire in stagiaires %} 
+    
+        <tr>
+            <td><a href="">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
+            <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+        </tr> 
+
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
