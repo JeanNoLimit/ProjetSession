@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[UniqueEntity('nom')]
 class Categorie
 {
     #[ORM\Id]
@@ -16,9 +18,8 @@ class Categorie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique: true)]
     #[Assert\Length(min: 2, max: 50)]
-    // #[Assert\Unique] Ne fonctionne pas comme attendu, demander pourquoi?
     private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Module::class, orphanRemoval: true)]
@@ -75,4 +76,9 @@ class Categorie
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->nom;
+    }
+
 }

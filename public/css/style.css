@@ -97,12 +97,14 @@ form {
     border: none;
     cursor: pointer;
     display: block;
-    margin: auto;
+    margin: 10px auto 5px auto;
+
+
 
     
 }
 
-.input {
+.input, select {
     width: 100%;
     box-sizing: border-box;
     border: solid 1px black;

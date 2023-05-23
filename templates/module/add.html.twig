@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules{% endblock %}
+
+{% block body %}
+<h1>Formulaire nouveau module</h1>
+
+<div class="formContainer">
+
+    {{ form_start(form) }}
+
+        <div class="row">
+            {{ form_row(form.nom) }}
+        </div> 
+        <div class="row">
+            {{ form_row(form.categorie) }}
+        </div> 
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(form) }}
+        </div>
+
+
+{{ form_end(form) }}
+</div>
+{% endblock %}

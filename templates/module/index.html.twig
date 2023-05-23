@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
-
-
-
 {% block title %}Liste des modules{% endblock %}
 
 {% block body %}
@@ -14,9 +10,9 @@
         </div>
 
     {% endfor %}
-    <h1>Liste des catégories</h1>
+    <h1>Liste des modules</h1>
 
-    <a href="#" class="btn">Nouveau module</a>
+    <a href="{{path('add_module')}}" class="btn">Nouveau module</a>
 
     <table class="tList">
         <thead>
@@ -32,7 +28,7 @@
             <tr>
                 <td>{{module.nom}}</td>
                 <td>{{module.categorie.nom}}</td>
-                <td><i class="fa-regular fa-pen-to-square"></i> / <i class="fa-regular fa-trash-can"></i></td>
+                <td><a href="{{path('edit_module', {'id': module.id})}}"><i class="fa-regular fa-pen-to-square"></i></a> / <a href="{{path('delete_module', {'id' : module.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
             </tr> 
             
             {% endfor %}

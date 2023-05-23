@@ -19,7 +19,7 @@ class Stagiaire
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 100)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 1)]
