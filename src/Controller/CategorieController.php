@@ -21,7 +21,7 @@ class CategorieController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
-        $categories=$entityManager->getRepository(Categorie::class)->findAll();
+        $categories=$entityManager->getRepository(Categorie::class)->findby([], ['nom' => 'ASC']);
 
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories
