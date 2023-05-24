@@ -132,15 +132,21 @@ label{
     display:flex;
 }
 
+/*******************************conteneur info (partagé entre détail session et détail utilisateur)***********/
+
+.info {
+    background-color: #F6F6F6;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
+    padding: 0px 30px 20px 40px;
+}
+
+
 /********************************Détails utilisateur******************************/
 
 .infoProfil{
     max-width: 500px;
     margin: 40px auto;
-    background-color: #F6F6F6;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
-    padding: 0px 30px 20px 40px;
 }
 
 .infoProfil h3{
@@ -149,4 +155,38 @@ label{
 }
 p{
     margin : 0;
+}
+
+
+
+/*******************************Détails session***********************************/
+
+.containerSession{
+    display: flex;
+    flex-direction: row;
+}
+
+.infoAndModules{
+    width: 70%;
+}
+
+.listStagiaires{
+    width: 30%;
+}
+
+.infoSession{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/****************************Liste des sessions***********************************/
+
+.intitule_session{
+
+    font-weight: 500;
+}
+
+.intitule_session:hover {
+    color: rgba(0, 0, 0, 0.432);
 }

@@ -33,7 +33,7 @@
                 
                 {% if date(session.dateDebut) > date() %}
             <tr>
-                <td><a href="">{{session.intituleSession}}</a></td>
+                <td><a href="{{path('show_session', {'id': session.id})}}" class="intitule_session">{{session.intituleSession}}</a></td>
                 <td>{{session.dateDebut|date('d/m/Y')}}</td>
                 <td>{{session.dateFin|date('d/m/Y')}}</td>
                 <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>
@@ -62,7 +62,7 @@
             {% for session in sessions %}
                 {% if date(session.dateDebut) < date() and date(session.dateFin) > date() %}
             <tr>
-                <td><a href="">{{session.intituleSession}}</a></td>
+                <td><a href="{{path('show_session', {'id': session.id})}}" class="intitule_session">{{session.intituleSession}}</a></td>
                 <td>{{session.dateDebut|date('d/m/Y')}}</td>
                 <td>{{session.dateFin|date('d/m/Y')}}</td>
                 <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>
@@ -93,7 +93,7 @@
                 
            
             <tr>
-                <td><a href="">{{session.intituleSession}}</a></td>
+                <td><a href="{{path('show_session', {'id': session.id})}}" class="intitule_session">{{session.intituleSession}}</a></td>
                 <td>{{session.dateDebut|date('d/m/Y')}}</td>
                 <td>{{session.dateFin|date('d/m/Y')}}</td>
                 <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>

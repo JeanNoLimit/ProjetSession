@@ -73,7 +73,7 @@ class SessionController extends AbstractController
      * Fonction de suppression d'une session
      */
     #[Route('/session/delete/{id}', name : 'delete_session')]
-    public function delete(EntityManagerInterface $entityManager, Session $session):response {
+    public function delete(EntityManagerInterface $entityManager, Session $session): Response {
 
         $entityManager->remove($session);
         $entityManager->flush();
@@ -81,5 +81,16 @@ class SessionController extends AbstractController
         $this->addFlash('success', 'La session a bien été supprimée');
 
         return $this->redirectToRoute('liste_session');
+    }
+
+    #[Route('/session/show/{id}', name : 'show_session')]
+    public function show(EntityManagerInterface $entityManager, int $id): Response
+    {
+
+        $session=$entityManager->getRepository(Session::class)->find($id);
+
+        return $this->render('/session/show.html.twig', [
+            'session' => $session
+        ]);
     }
 }
