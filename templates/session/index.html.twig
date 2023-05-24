@@ -15,64 +15,9 @@
 
         <a href="" class="btn">Nouvelle session</a>
 
-
-    <h2>Sessions à venir</h2>
-
-        <table class="tList">
-        <thead>
-            <tr>
-                <th>session</th>
-                <th>date de début</th>
-                <th>date de fin</th>
-                <th>inscrits</th>
-                <th>modifications</th>
-            </tr>
-        </thead>
-        <tbody>
-
+        <h2>Sessions à venir</h2>
         
-            <tr>
-                <td><a href=""></a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
-            </tr> 
-
-
-        </tbody>
-        </table>
-    
-    <h2>Sessions en cours</h2>
-
-    <table class="tList">
-        <thead>
-            <tr>
-                <th>session</th>
-                <th>date de début</th>
-                <th>date de fin</th>
-                <th>inscrits</th>
-                <th>modifications</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        
-            <tr>
-                <td><a href=""></a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
-            </tr> 
-
-
-        </tbody>
-        </table>
-
-    <h2>Sessions terminées</h2>
-
-        <table class="tList">
+        <table class="tList listSessions">
             <thead>
                 <tr>
                     <th>session</th>
@@ -83,17 +28,80 @@
                 </tr>
             </thead>
             <tbody>
+                {# Tableau sessions à venir #}
+                {% for session in sessions %}
+                
+                {% if date(session.dateDebut) > date() %}
+            <tr>
+                <td><a href="">{{session.intituleSession}}</a></td>
+                <td>{{session.dateDebut|date('d/m/Y')}}</td>
+                <td>{{session.dateFin|date('d/m/Y')}}</td>
+                <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+                {% endif %}
+            {% endfor %}
+
+        </tbody>
+        </table>
     
-            
+    <h2>Sessions en cours</h2>
+
+    <table class="tList listSessions">
+        <thead>
+            <tr>
+                <th>session</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+                <th>inscrits</th>
+                <th>modifications</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Tableau sessions en cours #}
+            {% for session in sessions %}
+                {% if date(session.dateDebut) < date() and date(session.dateFin) > date() %}
+            <tr>
+                <td><a href="">{{session.intituleSession}}</a></td>
+                <td>{{session.dateDebut|date('d/m/Y')}}</td>
+                <td>{{session.dateFin|date('d/m/Y')}}</td>
+                <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+                {% endif %}
+            {% endfor %}
+
+        </tbody>
+        </table>
+
+    <h2>Sessions terminées</h2>
+
+        <table class="tList listSessions">
+            <thead>
                 <tr>
-                    <td><a href=""></a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
-                </tr> 
-    
-    
+                    <th>session</th>
+                    <th>date de début</th>
+                    <th>date de fin</th>
+                    <th>inscrits</th>
+                    <th>modifications</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Tableau sessions terminées #}
+            {% for session in sessions %}
+                {% if date(session.dateFin) < date() %}
+                    
+                
+           
+            <tr>
+                <td><a href="">{{session.intituleSession}}</a></td>
+                <td>{{session.dateDebut|date('d/m/Y')}}</td>
+                <td>{{session.dateFin|date('d/m/Y')}}</td>
+                <td>{{session.stagiaires|length}} / {{session.nbPlaces}}</td>
+                <td><a href=""><i class="fa-regular fa-pen-to-square"></i></a> / <a href=""><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr> 
+                {% endif %}
+            {% endfor %}
             </tbody>
             </table>
 
