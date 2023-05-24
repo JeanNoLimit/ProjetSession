@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -17,15 +18,22 @@ class Session
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 100)]
     private ?string $intituleSession = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Positive]
+    #[Assert\LessThan(40)]
     private ?int $nbPlaces = null;
 
     #[ORM\ManyToMany(targetEntity: Stagiaire::class, mappedBy: 'sessions')]

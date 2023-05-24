@@ -49,8 +49,10 @@ class StagiaireController extends AbstractController
     public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire = null, Request $request):Response
     {
         if(!$stagiaire){
+            $message = "Stagiaire ajouté";
             $stagiaire=new Stagiaire();
         }
+        else {$message = "Stagiaire modifié";}
 
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 
@@ -63,7 +65,7 @@ class StagiaireController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'formulaire enregistré');
+            $this->addFlash('success', $message);
 
             return $this->redirectToRoute('liste_stagiaire');
         }

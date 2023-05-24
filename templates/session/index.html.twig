@@ -6,14 +6,14 @@
 
     {% for message in app.flashes('success') %}
                 
-    <div class="flash-success">
+    <div class="flash flash-success">
         {{ message }}
     </div>
 
     {% endfor %}
     <h1>Liste des sessions</h1>
 
-        <a href="" class="btn">Nouvelle session</a>
+        <a href="{{path('add_session')}}" class="btn">Nouvelle session</a>
 
         <h2>Sessions à venir</h2>
         
