@@ -36,19 +36,27 @@ a{
 
 
 /********************************messages flash****************************/
-
-.flash-success{
+.flash {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 60%;
     height: 60px;
     margin: auto;
+    border-radius: 5px;
+}
+
+.flash-alert{
+    background-color: #fa41417c;
+    color: rgb(235, 4, 4);
+    border: solid 1px rgb(235, 4, 4);
+}
+.flash-success{
+
     background-color: #51fa417c;
     color: rgb(49, 139, 26);
-    
     border: solid 1px rgb(49, 139, 26);
-    border-radius: 5px;
+    
 }
 
 /*************************************HomePage ***************************************/

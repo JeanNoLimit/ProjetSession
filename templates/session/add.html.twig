@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}formulaire nouvelle session{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('alert') %}
+                
+<div class="flash flash-alert">
+    {{ message }}
+</div>
+{% endfor %}
+
+<h1>Formulaire nouvelle sessions</h1>
+
+
+<div class="formContainer">
+
+    {{ form_start(formSession) }}
+
+    <div class="row">
+        {{ form_row(formSession.intituleSession) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formSession.dateDebut) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formSession.dateFin) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formSession.nbPlaces) }}
+    </div> 
+    {{ form_end(formSession) }}
+</div>
+
+{% endblock %}
