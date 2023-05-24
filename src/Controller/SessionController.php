@@ -34,10 +34,15 @@ class SessionController extends AbstractController
      * 
      */
     #[Route('/session/add', name: 'add_session')]
+    #[Route('/session/edit/{id}', name:'edit_session')]
     public function add(EntityManagerInterface $entityManager,Session $session = null, Request $request): Response
     {
-
-        $session = new Session();
+        if(!$session){
+             $session = new Session();
+             $message="Session ajoutée";
+        }
+        else{$message="Session modifiée";}
+       
 
         $form = $this->createForm(SessionType::class, $session);
 
@@ -48,7 +53,7 @@ class SessionController extends AbstractController
                 $entityManager->persist($session);
                 $entityManager->flush();
     
-                $this->addFlash('success', 'formulaire enregistré');
+                $this->addFlash('success', $message);
     
                 return $this->redirectToRoute('liste_session');
             }else{
@@ -61,7 +66,7 @@ class SessionController extends AbstractController
         }
 
         return $this->render('session/add.html.twig', [
-            'formSession' => $form
+            'formSession' => $form,
         ]);
     }
 }
