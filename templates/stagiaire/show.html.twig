@@ -31,15 +31,18 @@
             </tr>
         </thead>
         <tbody>
-            {# {% for session in sessions %} 
-        
+           
+            {% for session in stagiaire.sessions|sort((a,b) =>date(b.dateDebut) <=> date(a.dateDebut))  %} 
+                {% if date(session.dateDebut) > date() or date(session.dateDebut) < date() and date(session.dateFin) > date() %}
+                    
+                
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{session.intituleSession}}</td>
+                <td>{{session.dateDebut|date('d/m/Y')}}</td>
+                <td>{{session.dateFin|date('d/m/Y')}}</td>
             </tr> 
-    
-            {% endfor %} #}
+                {% endif %}
+            {% endfor %}
         </tbody>
         </table>
 
