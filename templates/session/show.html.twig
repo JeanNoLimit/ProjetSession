@@ -47,7 +47,7 @@
                                 <td>{{programme.module.nom}}</td>
                                 <td> {{programme.module.categorie.nom}}</td>
                                 <td> {{programme.nbJours}} jours</td>
-                                <td class="icons"><a href="{{path('delete_programme', {'idSession' : session.id , 'id' : programme.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
+                                <td class="icons"><a href="{{path('delete_programme', {'idSession' : session.id , 'id' : programme.id})}}"><i class="fa-solid fa-minus"></i></a></td>
                             </tr> 
                         {% endfor %}
                     </tbody>
@@ -69,9 +69,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>test</td>
-                            <td> test</td>
-                            <td> test</td>
+                            <td></td>
+                            <td> </td>
+                            <td> </td>
                             <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
                         </tr>
                     </tbody>
@@ -83,7 +83,46 @@
     </div>
 
     <div class="listStagiaires">
-
+        <div class="containerTabForm">
+            <h2 class="moduleTitle">Stagiaires incrits</h2>
+            <div class="tabForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Prénom Nom</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="icons"><a href=""><i class="fa-solid fa-minus"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="marginTab"></div>
+        </div>
+        <div class="containerTabForm">
+            <h2 class="moduleTitle">Stagiaires non incrits</h2>
+            <div class="tabForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Prénom Nom</th>
+                            <th>Ajouter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="marginTab"></div>
+        </div>
 
     </div>
 </div>
