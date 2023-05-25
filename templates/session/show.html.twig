@@ -4,6 +4,14 @@
 
 {% block body %}
 
+{% for message in app.flashes('success') %}
+            
+<div class="flash flash-success">
+    {{ message }}
+</div>
+
+{% endfor %}
+
 <h1>{{session.intituleSession}} <a href="{{path('edit_session', {'id': session.id})}}"><i class="fa-regular fa-pen-to-square"></i></a></h1>
 
 
@@ -29,17 +37,19 @@
                         <tr>
                             <th>Module</th>
                             <th>Catégorie</th>
-                            <th>durée</th>
-                            <th>supprimer</th>
+                            <th>Durée</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>test</td>
-                            <td> test</td>
-                            <td> test</td>
-                            <td class="icons"><a href=""><i class="fa-regular fa-trash-can"></i></a></td>
-                        </tr>
+                        {% for programme in session.programmes %}
+                            <tr>
+                                <td>{{programme.module.nom}}</td>
+                                <td> {{programme.module.categorie.nom}}</td>
+                                <td> {{programme.nbJours}} jours</td>
+                                <td class="icons"><a href="{{path('delete_programme', {'idSession' : session.id , 'id' : programme.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
+                            </tr> 
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -53,8 +63,8 @@
                         <tr>
                             <th>Module</th>
                             <th>Catégorie</th>
-                            <th>durée</th>
-                            <th>supprimer</th>
+                            <th>Durée</th>
+                            <th>Ajouter</th>
                         </tr>
                     </thead>
                     <tbody>

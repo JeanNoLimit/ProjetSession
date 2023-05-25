@@ -83,11 +83,14 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('liste_session');
     }
 
+
+    
     #[Route('/session/show/{id}', name : 'show_session')]
     public function show(EntityManagerInterface $entityManager, int $id): Response
     {
 
         $session=$entityManager->getRepository(Session::class)->find($id);
+        
 
         return $this->render('/session/show.html.twig', [
             'session' => $session
