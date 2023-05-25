@@ -81,7 +81,7 @@
         </div>
         
     </div>
-
+                                                            {# Liste des stagiaires #}
     <div class="listStagiaires">
         <div class="containerTabForm">
             <h2 class="moduleTitle">Stagiaires incrits</h2>
@@ -94,10 +94,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="icons"><a href=""><i class="fa-solid fa-minus"></i></a></td>
-                        </tr>
+                        {% for stagiaire in session.stagiaires|sort((a,b)=> a.prenom <=> b.prenom)|sort((a,b) => a.nom <=> b.nom) %}
+                            <tr>
+                                <td><a href="{{path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
+                                <td class="icons"><a href=""><i class="fa-solid fa-minus"></i></a></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
