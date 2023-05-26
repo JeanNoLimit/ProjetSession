@@ -40,6 +40,20 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    public function findUnprogrammedModules(int $idSession, EntityManager $em){
+        $query = $em->createQuery('
+            SELECT m
+            FROM App\Entity\Module m
+            WHERE m.id NOT IN (
+                SELECT m2.id
+                FROM App\Entity\Module m2
+                INNER JOIN App\Entity\Programme p WITH m2.id = p.module
+                WHERE p.session = :sessionId
+            )')
+            ->setParameter('sessionId', $idSession);
+            return $query->getResult();
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */
