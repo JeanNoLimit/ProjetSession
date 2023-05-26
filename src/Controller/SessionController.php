@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Programme;
 use App\Entity\Stagiaire;
@@ -92,14 +93,35 @@ class SessionController extends AbstractController
    
     
     #[Route('/session/show/{id}', name : 'show_session')]
-    public function show(EntityManagerInterface $entityManager, int $id): Response
-    {
-
+    #[Route('/session/addProgram/{id}/{idModule}', name : 'add_program')]
+    public function show(EntityManagerInterface $entityManager,Module $module=null, Programme $programme=null, int $id, int $idModule=null): Response
+    { 
+        
         $session=$entityManager->getRepository(Session::class)->find($id);
+        
+        if(isset($_POST['submit'])){
+            // var_dump($_POST);die;
+            $nbJours=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+            
+            if($nbJours){
+                $module=$entityManager->getRepository(Module::class)->find($idModule);
+                $programme=new Programme();
+                $programme->setModule($module);
+                $programme->setSession($session);
+                $programme->setNbJours($nbJours);
+                $entityManager->persist($programme);
+                $entityManager->flush();
+                // var_dump($programme);die;
+            } 
+        }
+        
+        $modules=$entityManager->getRepository(Session::class)->findUnprogrammedModules($id, $entityManager);
+       
         
 
         return $this->render('/session/show.html.twig', [
-            'session' => $session
+            'session' => $session,
+            'modules' => $modules
         ]);
     }
 
@@ -107,12 +129,6 @@ class SessionController extends AbstractController
     public function deleteInscription( Session $session, Stagiaire $stagiaire, EntityManagerInterface  $em): Response
     {
         
-        // foreach ($session->getStagiaires() as $stagiaire){
-
-        // }
-
-              
-
         $session->removeStagiaire($stagiaire);
 
          // tell Doctrine you want to (eventually) save the Product (no queries yet)
@@ -121,12 +137,6 @@ class SessionController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $em->flush();
 
-
-        // foreach ($session->getStagiaires() as $stagiaire){
-        //     var_dump($stagiaire->getId());
-        // }
-        // die;
-       
         $this->addFlash('success', 'le stagiaire a été retiré de la session');
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);

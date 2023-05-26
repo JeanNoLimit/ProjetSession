@@ -68,12 +68,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for module in modules %}
+                            
                         <tr>
-                            <td></td>
-                            <td> </td>
-                            <td> </td>
-                            <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
-                        </tr>
+                            <td>{{module.nom}}</td>
+                            <td> {{module.categorie.nom}}</td>
+                            <form action="{{path('add_program', {'id': session.id, 'idModule' : module.id})}}" method="post">
+                                <td><input type="number" name="duree" id="duree" required class="nbJours"></td>
+                                <td><input type="submit" name ="submit" value="test"></td>
+                                {# <td class="icons"><i class="fa-sharp fa-regular fa-plus"></i></td> #}
+                            </form>
+                        </tr> 
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
