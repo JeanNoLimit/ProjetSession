@@ -11,10 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProgrammeController extends AbstractController
 {
-    #[Route('/programme/delete/{idSession}/{id}', name: 'delete_programme')]
-    public function delete(EntityManagerInterface $entityManager, Programme $programme, int $idSession, int $id): Response
+    #[Route('/programme/delete/{id}', name: 'delete_programme')]
+    public function delete(EntityManagerInterface $entityManager, Programme $programme, int $idSession= null, int $id): Response
     {
-
+        $idSession=$programme->getSession()->getId();
         $entityManager->remove($programme);
         $entityManager->flush();
 

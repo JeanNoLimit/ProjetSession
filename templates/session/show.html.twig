@@ -47,7 +47,7 @@
                                 <td>{{programme.module.nom}}</td>
                                 <td> {{programme.module.categorie.nom}}</td>
                                 <td> {{programme.nbJours}} jours</td>
-                                <td class="icons"><a href="{{path('delete_programme', {'idSession' : session.id , 'id' : programme.id})}}"><i class="fa-solid fa-minus"></i></a></td>
+                                <td class="icons"><a href="{{path('delete_programme', {'id' : programme.id})}}"><i class="fa-solid fa-minus"></i></a></td>
                             </tr> 
                         {% endfor %}
                     </tbody>
