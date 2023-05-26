@@ -97,7 +97,7 @@
                         {% for stagiaire in session.stagiaires|sort((a,b)=> a.prenom <=> b.prenom)|sort((a,b) => a.nom <=> b.nom) %}
                             <tr>
                                 <td><a href="{{path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
-                                <td class="icons"><a href=""><i class="fa-solid fa-minus"></i></a></td>
+                                <td class="icons"><a href="{{path('delete_inscription', {'session' : session.id , 'stagiaire': stagiaire.id })}}"><i class="fa-solid fa-minus"></i></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

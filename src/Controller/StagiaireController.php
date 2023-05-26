@@ -32,9 +32,9 @@ class StagiaireController extends AbstractController
      * Fonction affichage détail d'un stagiaire
      */
     #[Route('/stagiaire/{id}/show', name: 'show_stagiaire')]
-    public function show(EntityManagerInterface $entityManager, int $id): Response
+    public function show( Stagiaire $stagiaire): Response
     {
-        $stagiaire= $entityManager->getRepository(Stagiaire::class)->find($id);
+      
 
         return $this->render('stagiaire/show.html.twig', [
             'stagiaire' =>$stagiaire
@@ -78,6 +78,7 @@ class StagiaireController extends AbstractController
     #[Route('/stagiaire/delete/{id}', name:'delete_stagiaire')]
     public function delete(EntityManagerInterface $entityManager, Stagiaire $stagiaire): Response
     {
+        
         $entityManager->remove($stagiaire);
         $entityManager->flush();
 
@@ -85,4 +86,9 @@ class StagiaireController extends AbstractController
 
         return $this->redirectToRoute('liste_stagiaire');
     }
+
+    
+
+
+
 }
