@@ -49,11 +49,15 @@ class SessionRepository extends ServiceEntityRepository
                 FROM App\Entity\Module m2
                 INNER JOIN App\Entity\Programme p WITH m2.id = p.module
                 WHERE p.session = :sessionId
-            )')
+            )
+            ORDER BY m.nom ASC')
             ->setParameter('sessionId', $idSession);
             return $query->getResult();
     }
 
+    // public function findStudents(int $idSession, EntityManager $em){
+    //     $query= $em->createQuery();
+    // }
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

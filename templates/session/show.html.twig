@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for programme in session.programmes %}
+                        {% for programme in session.programmes|sort((a,b)=> a.module.nom <=> b.module.nom) %}
                             <tr>
                                 <td>{{programme.module.nom}}</td>
                                 <td> {{programme.module.categorie.nom}}</td>
