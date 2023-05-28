@@ -89,9 +89,15 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('liste_session');
     }
 
-
-   
     
+   
+    /**
+     * -Fonction affichage du détail d'une session
+     * -Affichage de la liste des  modules programmées
+     * -Affichage du formulaire pour programmer un nouveau module à la session
+     * -Affichage de la liste des stagiaires inscrits
+     * -Affichage du formulaire d'inscription des stagiaires à la session
+     */
     #[Route('/session/show/{id}', name : 'show_session')]
     #[Route('/session/addProgram/{id}/{idModule}', name : 'add_program')]
     public function show(EntityManagerInterface $entityManager,Module $module=null, Programme $programme=null, int $id, int $idModule=null): Response
