@@ -39,12 +39,18 @@ class Stagiaire
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $ville = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\email(mode : "html5")]
     private ?string $email = null;
 
     #[ORM\Column(length: 13)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max: 13)]
     private ?string $tel = null;
 
     #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'stagiaires')]

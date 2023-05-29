@@ -3,11 +3,12 @@
 namespace App\Form;
 
 
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Stagiaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -49,18 +50,31 @@ class StagiaireType extends AbstractType
             ->add('dateNaissance', DateType::class, [
                 'widget' => 'choice',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'input']
+                'attr' => ['class' => 'input'],
+                'constraints' => new Assert\NotBlank()
             ])
             ->add('ville', TextType::class,[
-                'attr' => ['class' => 'input']
+                'attr' => ['class' => 'input'],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Assert\NotBlank()
+                ]
             ])
             ->add('email', EmailType::class,[
-                'attr' => ['class' => 'input']
+                'attr' => ['class' => 'input'],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 100]),
+                    new Assert\NotBlank()
+                ]
             ] )
-            ->add('tel', TextType::class, [
+            ->add('tel', TelType::class, [
                 'attr' => ['class' => 'input',
                 'minlength'=> '10',
-                'maxlength'=> '13']
+                'maxlength'=> '13'],
+                'constraints' => [
+                    new Assert\Length(['min' => 10, 'max' => 13]),
+                    new Assert\NotBlank()
+                ]
             ])
             // ->add('sessions')
             ->add('Envoyer', SubmitType::class, [

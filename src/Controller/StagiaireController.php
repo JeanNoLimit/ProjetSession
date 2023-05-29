@@ -16,7 +16,7 @@ class StagiaireController extends AbstractController
     /**
      * Fonction affichage lsite des stagiaires
      */
-    #[Route('/stagiaire', name: 'liste_stagiaire')]
+    #[Route('/stagiaire', name: 'liste_stagiaire', methods : ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
 
@@ -31,7 +31,7 @@ class StagiaireController extends AbstractController
     /**
      * Fonction affichage détail d'un stagiaire
      */
-    #[Route('/stagiaire/{id}/show', name: 'show_stagiaire')]
+    #[Route('/stagiaire/{id}/show', name: 'show_stagiaire', methods : ['GET'])]
     public function show( Stagiaire $stagiaire): Response
     {
       
@@ -41,11 +41,12 @@ class StagiaireController extends AbstractController
         ]);
     }
 
+    
     /**
      * fonction affichage formulaire nouveau stagiaire et modification
      */
-    #[Route('/stagiaire/add', name:'add_stagiaire')]
-    #[Route('stagiaire/{id}/edit', name:'edit_stagiaire')]
+    #[Route('/stagiaire/add', name:'add_stagiaire', methods : ['GET','POST'])]
+    #[Route('stagiaire/{id}/edit', name:'edit_stagiaire', methods : ['GET','POST'])]
     public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire = null, Request $request):Response
     {
         if(!$stagiaire){
@@ -75,7 +76,11 @@ class StagiaireController extends AbstractController
             'stagiaire' => $stagiaire
         ]);
     }
-    #[Route('/stagiaire/delete/{id}', name:'delete_stagiaire')]
+
+    /**
+     * Fonction de suppression d'un stagiaire
+     */
+    #[Route('/stagiaire/delete/{id}', name:'delete_stagiaire', methods : ['GET'])]
     public function delete(EntityManagerInterface $entityManager, Stagiaire $stagiaire): Response
     {
         
