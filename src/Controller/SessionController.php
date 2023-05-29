@@ -22,7 +22,7 @@ class SessionController extends AbstractController
     /**
      * Renvoie l'affichage de la liste des sessions 
      */
-    #[Route('/session', name: 'liste_session')]
+    #[Route('/session', name: 'liste_session', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $sessions=$entityManager->getRepository(Session::class)->findBy([],['dateDebut'=>'ASC']);
@@ -39,8 +39,8 @@ class SessionController extends AbstractController
      * Renvoie l'affichage du formulaire + gestion du formulaire + modification du formulaire
      * 
      */
-    #[Route('/session/add', name: 'add_session')]
-    #[Route('/session/edit/{id}', name:'edit_session')]
+    #[Route('/session/add', name: 'add_session', methods: ['GET','POST'])]
+    #[Route('/session/edit/{id}', name:'edit_session', methods: ['GET','POST'])]
     public function add(EntityManagerInterface $entityManager,Session $session = null, Request $request): Response
     {
         if(!$session){
@@ -78,7 +78,7 @@ class SessionController extends AbstractController
     /**
      * Fonction de suppression d'une session
      */
-    #[Route('/session/delete/{id}', name : 'delete_session')]
+    #[Route('/session/delete/{id}', name : 'delete_session', methods :['GET'])]
     public function delete(EntityManagerInterface $entityManager, Session $session): Response {
 
         $entityManager->remove($session);
@@ -99,8 +99,8 @@ class SessionController extends AbstractController
      * -Affichage du formulaire d'inscription des stagiaires à la session
      */
     #[Route('/session/show/{id}', name : 'show_session')]
-    #[Route('/session/addProgram/{id}/{idModule}', name : 'add_program')]
-    #[Route('/session/add_student_to_session/{id}/{stagiaire}', name : 'add_student_to_session')]
+    #[Route('/session/addProgram/{id}/{idModule}', name : 'add_program', methods : ['POST'])]
+    #[Route('/session/add_student_to_session/{id}/{stagiaire}', name : 'add_student_to_session', methods : ['POST'])]
     public function show(EntityManagerInterface $entityManager,Module $module=null, Programme $programme=null,Stagiaire $stagiaire=null, int $id, int $idModule=null): Response
     { 
         
@@ -109,19 +109,25 @@ class SessionController extends AbstractController
         
         //Ajout d'un module dans une session
         if(isset($_POST['submit'])){
-            // var_dump($_POST);die;
+           
             $nbJours=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
             
             if($nbJours){
-                $module=$entityManager->getRepository(Module::class)->find($idModule);
-                $programme=new Programme();
-                $programme->setModule($module);
-                $programme->setSession($session);
-                $programme->setNbJours($nbJours);
-                $entityManager->persist($programme);
-                $entityManager->flush();
-                // var_dump($programme);die;
-                $this->addFlash('success', 'Le module a été ajouté à la session session');
+                if($nbJours>0){
+                    $module=$entityManager->getRepository(Module::class)->find($idModule);
+                    $programme=new Programme();
+                    $programme->setModule($module);
+                    $programme->setSession($session);
+                    $programme->setNbJours($nbJours);
+                    $entityManager->persist($programme);
+                    $entityManager->flush();
+                    // var_dump($programme);die;
+                    $this->addFlash('success', 'Le module a été ajouté à la session session');
+                    return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+                }else{
+                    $this->addFlash('alert', 'Veuillez rentrer un nombre de jours positif et non nul');
+                    return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+                }
             } 
         }
 
@@ -134,7 +140,7 @@ class SessionController extends AbstractController
             // actually executes the queries (i.e. the INSERT query)
             $entityManager->flush();
             $this->addFlash('success', 'Le stagiaire a été ajouté à la session');
-
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
            
         }
 
@@ -152,7 +158,11 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[route('/session/deleteInscription/{session}/{stagiaire}', name:'delete_inscription')]
+
+    /**
+     * Fonction pour désinscrire un stagiaire à une session.
+     */
+    #[route('/session/deleteInscription/{session}/{stagiaire}', name:'delete_inscription', methods : ['GET'])]
     public function deleteInscription( Session $session, Stagiaire $stagiaire, EntityManagerInterface  $em): Response
     {
         

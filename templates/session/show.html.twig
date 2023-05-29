@@ -4,13 +4,19 @@
 
 {% block body %}
 
-{% for message in app.flashes('success') %}
-            
+{% for message in app.flashes('success') %}         
 <div class="flash flash-success">
     {{ message }}
 </div>
-
 {% endfor %}
+
+{% for message in app.flashes('alert') %}
+                
+<div class="flash flash-alert">
+    {{ message }}
+</div>
+{% endfor %}
+
 
 <h1>{{session.intituleSession}} <a href="{{path('edit_session', {'id': session.id})}}"><i class="fa-regular fa-pen-to-square"></i></a></h1>
 
@@ -74,7 +80,7 @@
                             <td>{{module.nom}}</td>
                             <td> {{module.categorie.nom}}</td>
                             <form action="{{path('add_program', {'id': session.id, 'idModule' : module.id})}}" method="post">
-                                <td><input type="number" name="duree" id="duree" required class="nbJours"></td>
+                                <td><input type="number" name="duree" id="duree" required class="nbJours" min="1" max="365"></td>
                                 <td class="icons"><button type="submit" name="submit" ><i class="fa-sharp fa-regular fa-plus"></i></button></td>
                                 
                             </form>

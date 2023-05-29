@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProgrammeRepository::class)]
 class Programme
@@ -14,6 +15,8 @@ class Programme
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?int $nbJours = null;
 
     #[ORM\ManyToOne(inversedBy: 'programmes')]
