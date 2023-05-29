@@ -104,7 +104,9 @@ class SessionController extends AbstractController
     { 
         
         $session=$entityManager->getRepository(Session::class)->find($id);
+       
         
+
         if(isset($_POST['submit'])){
             // var_dump($_POST);die;
             $nbJours=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
@@ -122,12 +124,15 @@ class SessionController extends AbstractController
         }
         
         $modules=$entityManager->getRepository(Session::class)->findUnprogrammedModules($id, $entityManager);
-       
+        $stagiaires=$entityManager->getRepository(Session::class)->findStudents($id, $entityManager);
+        // var_dump($stagiaires);die;
         
 
         return $this->render('/session/show.html.twig', [
             'session' => $session,
-            'modules' => $modules
+            'modules' => $modules,
+            'stagiaires' => $stagiaires
+
         ]);
     }
 

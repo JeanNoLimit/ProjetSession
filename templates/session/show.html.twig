@@ -75,8 +75,8 @@
                             <td> {{module.categorie.nom}}</td>
                             <form action="{{path('add_program', {'id': session.id, 'idModule' : module.id})}}" method="post">
                                 <td><input type="number" name="duree" id="duree" required class="nbJours"></td>
-                                <td><input type="submit" name ="submit" value="test"></td>
-                                {# <td class="icons"><i class="fa-sharp fa-regular fa-plus"></i></td> #}
+                                <td class="icons"><button type="submit" name="submit" ><i class="fa-sharp fa-regular fa-plus"></i></button></td>
+                                
                             </form>
                         </tr> 
                         {% endfor %}
@@ -122,10 +122,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
-                        </tr>
+                         {% for stagiaire in stagiaires %}
+                            <tr>
+                                <td>{{stagiaire.prenom}} {{stagiaire.nom}}</td>
+                                <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

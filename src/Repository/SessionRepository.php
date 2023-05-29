@@ -40,6 +40,7 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    // Requête permettant d'obtenir la liste des modules non programmés pour une session.
     public function findUnprogrammedModules(int $idSession, EntityManager $em){
         $query = $em->createQuery('
             SELECT m
@@ -55,9 +56,19 @@ class SessionRepository extends ServiceEntityRepository
             return $query->getResult();
     }
 
-    // public function findStudents(int $idSession, EntityManager $em){
-    //     $query= $em->createQuery();
-    // }
+    //Requête permettant d'obtenir la liste des stagiaires non inscrits à une session.
+    public function findStudents(int $idSession, EntityManager $em){
+        $query= $em->createQuery('SELECT s
+                                    FROM App\Entity\Stagiaire s
+                                    WHERE s.id NOT IN(
+                                        SELECT s2.id
+                                        FROM App\Entity\Stagiaire s2
+                                        INNER JOIN s2.sessions ss
+                                        WHERE ss.id = :sessionId)
+                                        ORDER BY s.nom ASC, s.prenom ASC')
+            ->setParameter('sessionId', $idSession);
+            return $query->getResult();
+    }
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */
