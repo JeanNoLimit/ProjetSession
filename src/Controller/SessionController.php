@@ -100,13 +100,14 @@ class SessionController extends AbstractController
      */
     #[Route('/session/show/{id}', name : 'show_session')]
     #[Route('/session/addProgram/{id}/{idModule}', name : 'add_program')]
-    public function show(EntityManagerInterface $entityManager,Module $module=null, Programme $programme=null, int $id, int $idModule=null): Response
+    #[Route('/session/add_student_to_session/{id}/{stagiaire}', name : 'add_student_to_session')]
+    public function show(EntityManagerInterface $entityManager,Module $module=null, Programme $programme=null,Stagiaire $stagiaire=null, int $id, int $idModule=null): Response
     { 
         
         $session=$entityManager->getRepository(Session::class)->find($id);
        
         
-
+        //Ajout d'un module dans une session
         if(isset($_POST['submit'])){
             // var_dump($_POST);die;
             $nbJours=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
@@ -120,8 +121,23 @@ class SessionController extends AbstractController
                 $entityManager->persist($programme);
                 $entityManager->flush();
                 // var_dump($programme);die;
+                $this->addFlash('success', 'Le module a été ajouté à la session session');
             } 
         }
+
+        // Ajout d'un stagiaire dans une session
+        if(isset($_POST['submitStudent'])){
+
+            $session->addStagiaire($stagiaire);
+             // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            $entityManager->persist($session);
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+            $this->addFlash('success', 'Le stagiaire a été ajouté à la session');
+
+           
+        }
+
         
         $modules=$entityManager->getRepository(Session::class)->findUnprogrammedModules($id, $entityManager);
         $stagiaires=$entityManager->getRepository(Session::class)->findStudents($id, $entityManager);

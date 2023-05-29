@@ -125,7 +125,10 @@
                          {% for stagiaire in stagiaires %}
                             <tr>
                                 <td>{{stagiaire.prenom}} {{stagiaire.nom}}</td>
-                                <td class="icons"><a href=""><i class="fa-sharp fa-regular fa-plus"></i></a></td>
+                                <form action="{{path('add_student_to_session', { 'id' : session.id, 'stagiaire' : stagiaire.id})}}" method="post">
+                                    <td class="icons"><button type="submit" name="submitStudent"><i class="fa-sharp fa-regular fa-plus"></i></button> </td>
+                                    
+                                </form>
                             </tr>
                         {% endfor %}
                     </tbody>
