@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for programme in session.programmes|sort((a,b)=> a.module.nom <=> b.module.nom) %}
+                        {% for programme in session.programmes|sort((a,b)=> a.module.categorie.nom <=> b.module.categorie.nom)|sort((a,b)=> a.module.nom <=> b.module.nom) %}
                             <tr>
                                 <td>{{programme.module.nom}}</td>
                                 <td> {{programme.module.categorie.nom}}</td>
@@ -130,7 +130,7 @@
                     <tbody>
                          {% for stagiaire in stagiaires %}
                             <tr>
-                                <td>{{stagiaire.prenom}} {{stagiaire.nom}}</td>
+                                <td><a href="{{path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}} {{stagiaire.nom}}</a></td>
                                 <form action="{{path('add_student_to_session', { 'id' : session.id, 'stagiaire' : stagiaire.id})}}" method="post">
                                     <td class="icons"><button type="submit" name="submitStudent"><i class="fa-sharp fa-regular fa-plus"></i></button> </td>
                                     
