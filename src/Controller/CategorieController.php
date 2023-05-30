@@ -18,7 +18,7 @@ class CategorieController extends AbstractController
      * Fonction renvoie vers l'affichage de la liste des catégories.
      * @var EntityManagerInterface
      */
-    #[Route('/categorie', name: 'liste_categorie')]
+    #[Route('/categorie', name: 'liste_categorie', methods : ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
 
@@ -35,8 +35,8 @@ class CategorieController extends AbstractController
      * @return Response
      */
 
-    #[Route('/categorie/add', name: 'add_categorie')]
-    #[Route('/categorie/{id}/edit', name: "edit_categorie")]
+    #[Route('/categorie/add', name: 'add_categorie', methods: ['GET', 'POST'])]
+    #[Route('/categorie/{id}/edit', name: "edit_categorie", methods: ['GET', 'POST'])]
     public function add(EntityManagerInterface $entityManager,Categorie $categorie = null, Request $request): Response
     {
         if(!$categorie) {
@@ -72,7 +72,7 @@ class CategorieController extends AbstractController
      * Fonction suppression d'une catégorie
      */
 
-    #[Route('/categorie/delete/{id}', name: "delete_categorie")]
+    #[Route('/categorie/delete/{id}', name: "delete_categorie", methods:['GET'])]
     public function delete(EntityManagerInterface $entityManager, Categorie $categorie): Response
     {
         $entityManager->remove($categorie);
