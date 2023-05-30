@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Bienvenue sur le projet Session!{% endblock %}
 
 {% block body %}
 
+    {% if app.user %}
 
-    <h1 class="homeTitle">Bienvenue sur l'application de gestion des sessions de formations</h1>
-    {# <p>Insérer description de l'application</p> #}
-    <p class="description">Pour commencer, rendez-vous sur la page d'inscription pour utliser l'application, ou si vous disposez déja d'un compte connectez-vous.</p>
-    <p class="description"><a href="">Inscription</a> - <a href="">Connection</a></p>
+    <h1 class="homeTitle">Bienvenue {{app.user.prenom}} {{app.user.nom}}</h1>
+    
 
-
+    {% else %}
+        <h1 class="homeTitle">Bienvenue sur l'application de gestion des sessions de formations</h1>
+        {# <p>Insérer description de l'application</p> #}
+        <p class="description">Pour commencer, rendez-vous sur la page d'inscription pour utliser l'application, ou si vous disposez déja d'un compte connectez-vous.</p>
+        <p class="description"><a href="{{path('app_register')}}">Inscription</a> - <a href="{{path('app_login')}}">Connection</a></p>
+    {% endif %}
 
 {% endblock %}
