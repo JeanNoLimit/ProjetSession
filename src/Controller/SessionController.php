@@ -146,7 +146,7 @@ class SessionController extends AbstractController
                 $this->addFlash('success', 'Le stagiaire a été ajouté à la session');
                 return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
             }else{
-                $this->addFlash('alert', 'Vous avez dépassé le nombre de place autorisé pour la session');
+                $this->addFlash('alert', 'Vous avez dépassé le nombre de place autorisée pour la session');
                 return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
             }
             
