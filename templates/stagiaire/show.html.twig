@@ -37,14 +37,43 @@
                     
                 
             <tr>
-                <td>{{session.intituleSession}}</td>
+                <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intituleSession}}</a></td>
                 <td>{{session.dateDebut|date('d/m/Y')}}</td>
                 <td>{{session.dateFin|date('d/m/Y')}}</td>
             </tr> 
                 {% endif %}
+
             {% endfor %}
         </tbody>
-        </table>
+    </table>
+
+    <h2>Sessions terminées</h2>
+
+    <table class="tList">
+        <thead>
+            <tr>
+                <th>Session</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            {% for session in stagiaire.sessions|sort((a,b) =>date(b.dateDebut) <=> date(a.dateDebut))  %} 
+                {% if date(session.dateFin) < date() %}
+                    
+                
+            <tr>
+                <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intituleSession}}</a></td>
+                <td>{{session.dateDebut|date('d/m/Y')}}</td>
+                <td>{{session.dateFin|date('d/m/Y')}}</td>
+            </tr> 
+                {% endif %}
+              
+            {% endfor %} 
+        </tbody>
+    </table>
+
 
 
 
