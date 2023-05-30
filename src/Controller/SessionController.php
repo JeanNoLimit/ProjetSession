@@ -134,13 +134,22 @@ class SessionController extends AbstractController
         // Ajout d'un stagiaire dans une session
         if(isset($_POST['submitStudent'])){
 
-            $session->addStagiaire($stagiaire);
-             // tell Doctrine you want to (eventually) save the Product (no queries yet)
-            $entityManager->persist($session);
-            // actually executes the queries (i.e. the INSERT query)
-            $entityManager->flush();
-            $this->addFlash('success', 'Le stagiaire a été ajouté à la session');
-            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+            $nbPlaces=$session->getNbPlaces();
+            $nbInscrit=count($session->getStagiaires());
+            // var_dump($nbPlaces);var_dump($nbInscrit);die;
+            if($nbInscrit<$nbPlaces){
+                $session->addStagiaire($stagiaire);
+                // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                $entityManager->persist($session);
+                // actually executes the queries (i.e. the INSERT query)
+                $entityManager->flush();
+                $this->addFlash('success', 'Le stagiaire a été ajouté à la session');
+                return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+            }else{
+                $this->addFlash('alert', 'Vous avez dépassé le nombre de place autorisé pour la session');
+                return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+            }
+            
            
         }
 
