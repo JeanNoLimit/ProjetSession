@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profil utilisateur{% endblock %}
+
+{% block body %}
+
+<h1>Profil utilisateur</h1>
+
+<a href="" class="btn">Modifier le profil</a>
+
+<div class="info infoProfil">
+
+    <p style="padding-top:15px">Nom : {{app.user.nom}}</p>
+    <p>Prénom : {{app.user.prenom}}</p>
+    <p>email : {{app.user.email}}</p>
+</div>
+
+
+
+
+{% endblock %}

@@ -46,7 +46,7 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="">ADMIN</a>
             {% endif %}
-            <a href="#"><i class="fa-solid fa-user"></i> {{app.user.prenom}}</a>
+            <a href="{{path('view_profile')}}"><i class="fa-solid fa-user"></i> {{app.user.prenom}}</a>
             <a href="{{path('app_logout')}}">DECONNEXION</a>
             <a href="javascript:void(0);" class="icon" onclick="navFunction()">&#9776;</a>
         </div>
