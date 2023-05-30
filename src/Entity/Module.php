@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ModuleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ModuleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ModuleRepository::class)]
 class Module
@@ -16,6 +17,8 @@ class Module
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min : 2, max: 100)]
     private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'modules')]

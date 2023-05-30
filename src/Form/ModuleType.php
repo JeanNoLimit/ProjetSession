@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ModuleType extends AbstractType
 {
@@ -18,7 +19,13 @@ class ModuleType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom du module',
-                'attr' => ['class'=>'input']
+                'attr' => ['class'=>'input',
+                'minlength' => '2',
+                'maxlength' => '100'],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Assert\NotBlank()
+                ]
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class

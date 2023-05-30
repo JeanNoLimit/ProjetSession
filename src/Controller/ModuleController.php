@@ -16,7 +16,7 @@ class ModuleController extends AbstractController
     /**
      * Fonction affichage de la liste des modules
      */
-    #[Route('/module', name: 'liste_module')]
+    #[Route('/module', name: 'liste_module', methods : ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $modules=$entityManager->getRepository(Module::class)->findAll();
@@ -30,7 +30,7 @@ class ModuleController extends AbstractController
     /**
      * fonction d'ajout et modification des modules
      */
-    #[Route('/module/add', name: 'add_module')]
+    #[Route('/module/add', name: 'add_module', methods : ['GET','POST'])]
     #[Route('/module/edit/{id}', name: 'edit_module')]
     public function add(EntityManagerInterface $entityManager, Module $module= null,Request $request): Response
     {
@@ -58,7 +58,7 @@ class ModuleController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/module/delete/{id}', name: 'delete_module')]
+    #[Route('/module/delete/{id}', name: 'delete_module', methods : ['GET'])]
     public function delete(EntityManagerInterface $entityManager, Module $module = null):Response
     {
         $entityManager->remove($module);
