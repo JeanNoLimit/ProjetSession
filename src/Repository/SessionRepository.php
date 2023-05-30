@@ -45,13 +45,14 @@ class SessionRepository extends ServiceEntityRepository
         $query = $em->createQuery('
             SELECT m
             FROM App\Entity\Module m
+            INNER JOIN m.categorie c
             WHERE m.id NOT IN (
                 SELECT m2.id
                 FROM App\Entity\Module m2
                 INNER JOIN App\Entity\Programme p WITH m2.id = p.module
                 WHERE p.session = :sessionId
             )
-            ORDER BY m.nom ASC')
+            ORDER BY c.nom ASC, m.nom ASC')
             ->setParameter('sessionId', $idSession);
             return $query->getResult();
     }
