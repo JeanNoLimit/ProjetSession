@@ -13,6 +13,11 @@
     <p style="padding-top:15px">Nom : {{app.user.nom}}</p>
     <p>Prénom : {{app.user.prenom}}</p>
     <p>email : {{app.user.email}}</p>
+    <p>Role :
+        {% for role in app.user.roles %}
+             {{role}} 
+        {% endfor %}
+    </p>   
 </div>
 
 
