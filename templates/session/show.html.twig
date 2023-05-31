@@ -29,11 +29,13 @@
             <div class="infoSessionLeft">
                 <p>date de début : {{session.dateDebut|date('d/m/Y')}}</p>
                 <p>date de fin : {{session.dateFin|date('d/m/Y')}}</p>
+                 <p class="formateur">Formateur : {{session.formateur}}</p>
             </div>
             <div class="infoSessionRight">
                 <p>Nombre d'inscrits : {{session.stagiaires|length}}/{{session.nbPlaces}}</p>
                 <p>Nombre de modules : {{session.programmes|length}}</p>
             </div>
+           
         </div>
         <div class="containerTabForm">
             <h2 class="moduleTitle">Modules</h2>
