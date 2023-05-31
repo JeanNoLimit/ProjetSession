@@ -41,6 +41,15 @@
                     <a href="{{path('add_stagiaire')}}">Nouveau stagiaire</a>
                 </div>
             </div>
+            <div class="dropdown">
+                <button class="dropbtn">FORMATEUR
+                    <i class="fa fa-caret-down"></i>  
+                </button>
+                <div class="dropdown-content">
+                    <a href="{{path('liste_formateur')}}">Liste</a>
+                    <a href="">Nouveau formateur</a>
+                </div>
+            </div>
     </div>
         <div class="rightNav">
             {% if is_granted('ROLE_ADMIN') %}
