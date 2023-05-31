@@ -24,10 +24,17 @@ class FormateurController extends AbstractController
     }
 
     #[Route('/formateur/add', name: 'add_formateur', methods: ['GET', 'POST'])]
-    public function add(EntityManagerInterface $em, Request $request): Response
+    #[Route('/formateur/{id}/edit', name: 'edit_formateur', methods: ['GET', 'POST'])]
+    public function add(EntityManagerInterface $em, Formateur $formateur, Request $request): Response
     {
-        $formateur = new Formateur();
-        $message='formateur ajouté';
+        if(!$formateur){
+            $formateur = new Formateur();
+            $message='formateur ajouté';
+        }
+        else{
+            $message='formateur modifié';
+        }
+       
         $formFormateur= $this->createForm(FormateurType::class, $formateur);
 
         $formFormateur->handleRequest($request);
@@ -45,7 +52,9 @@ class FormateurController extends AbstractController
         }
 
         return $this->render('formateur/add.html.twig', [
-            'formFormateur' => $formFormateur
+            'formFormateur' => $formFormateur,
+            'edit'=>$formateur->getId(),
+            'formateur' => $formateur
         ]);
     }
 }
