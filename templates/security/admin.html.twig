@@ -5,6 +5,37 @@
 
 {% block body %}
 
-<h1>Administration</h1>
+    {% for message in app.flashes('success') %}
+                    
+        <div class="flash flash-success">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+    <h1>Liste des utilisteurs</h1>
+
+
+    <table class="tList ">
+        <thead>
+            <tr>
+                <th>Prénom Nom</th>
+                <th>email</th>
+                <th>rôles</th>
+                <th>supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td> {{user.prenom}} {{user.nom}}</td>
+                <td>{{user.email}}</td>
+                <td>{% for role in user.roles %}{{role}} {% endfor %}</td>
+                <td><a href="{{path('delete_user', {'id' : user.id})}}"><i class="fa-regular fa-trash-can"></i></a></td>
+            </tr>        
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 
 {% endblock %}

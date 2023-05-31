@@ -62,4 +62,15 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    #[Route(path: 'security/delete/{id}', name : 'delete_user')]
+    public function delete_user(EntityManagerInterface $em, User $user):Response
+    {
+        $em->remove($user);
+        $em->flush();
+
+        $this->addFlash('success', 'L\'utilisateur à bien été supprimé');
+
+        return $this->redirectToRoute('administration');
+    }
+
 }
