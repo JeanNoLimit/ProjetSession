@@ -12,6 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FormateurController extends AbstractController
 {
+
+    /**
+     * Affichage de la liste des formateurs
+     *
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
     #[Route('/formateur', name: 'liste_formateur', methods: ['GET'])]
     public function index(EntityManagerInterface $em): Response
     {
@@ -23,9 +30,12 @@ class FormateurController extends AbstractController
         ]);
     }
 
+    /**
+     * Affichage du formulaire + edition formateur
+     */
     #[Route('/formateur/add', name: 'add_formateur', methods: ['GET', 'POST'])]
-    #[Route('/formateur/{id}/edit', name: 'edit_formateur', methods: ['GET', 'POST'])]
-    public function add(EntityManagerInterface $em, Formateur $formateur, Request $request): Response
+    #[Route('/formateur/edit/{id}', name: 'edit_formateur', methods: ['GET', 'POST'])]
+    public function add(EntityManagerInterface $em, Formateur $formateur=null, Request $request): Response
     {
         if(!$formateur){
             $formateur = new Formateur();
@@ -56,5 +66,19 @@ class FormateurController extends AbstractController
             'edit'=>$formateur->getId(),
             'formateur' => $formateur
         ]);
+    }
+
+    /**
+     * Fonction suppression d'un formateur
+     */
+    #[Route('/formateur/{id}/delete', name : 'delete_formateur')]
+    public function delete_formateur(EntityManagerInterface $em, Formateur $formateur){
+       
+        $em->remove($formateur);
+        $em->flush();
+
+        $this->addFlash('success', 'Le formateur a bien été supprimé.');
+
+        return $this->redirectToRoute('liste_formateur');
     }
 }
