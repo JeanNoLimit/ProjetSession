@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}formulaire nouveau formateur{% endblock %}
+
+{% block body %}
+
+<h1>Formulaire nouveau formateur</h1>
+
+
+<div class="formContainer">
+    {{ form_start(formFormateur) }}
+
+    <div class="row">
+        {{ form_row(formFormateur.nom) }}
+    </div> 
+    <div class="row">
+        {{ form_row(formFormateur.prenom) }}
+    </div> 
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(formFormateur) }}
+    </div>
+
+{{ form_end(formFormateur) }}
+</div>
+
+
+{% endblock %}

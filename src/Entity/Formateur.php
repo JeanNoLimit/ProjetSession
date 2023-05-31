@@ -6,6 +6,8 @@ use App\Repository\FormateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Assert\ExpressionSyntax;
+
 
 #[ORM\Entity(repositoryClass: FormateurRepository::class)]
 class Formateur
@@ -16,9 +18,13 @@ class Formateur
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min:2, max: 50)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $prenom = null;
 
     #[ORM\OneToMany(mappedBy: 'formateur', targetEntity: Session::class)]
