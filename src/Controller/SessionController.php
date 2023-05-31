@@ -61,7 +61,7 @@ class SessionController extends AbstractController
     
                 $this->addFlash('success', $message);
     
-                return $this->redirectToRoute('liste_session');
+                return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
             }else{ 
                 $this->addFlash('alert', 'La date de début de formation doit être inférieur à la date de fin');
                 if(!$session){
