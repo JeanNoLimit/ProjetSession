@@ -74,6 +74,14 @@ class FormateurController extends AbstractController
     #[Route('/formateur/{id}/delete', name : 'delete_formateur')]
     public function delete_formateur(EntityManagerInterface $em, Formateur $formateur){
        
+        // dd($formateur);die;
+        $listSession= $formateur->getSessions();
+
+        foreach($listSession as $session){
+            $formateur->removeSession($session);
+        }
+        
+        
         $em->remove($formateur);
         $em->flush();
 
